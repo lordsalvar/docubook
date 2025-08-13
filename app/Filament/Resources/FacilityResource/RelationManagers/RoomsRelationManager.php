@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\FacilityResource\RelationManagers;
 
+use App\Enums\RoomStatus;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -33,9 +34,9 @@ class RoomsRelationManager extends RelationManager
                 Forms\Components\Textarea::make('description')
                     ->maxLength(65535)
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('status')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Select::make('status')
+                    ->options(RoomStatus::class)
+                    ->required(),
             ]);
     }
 

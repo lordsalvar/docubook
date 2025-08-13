@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\FacilityStatus;
 
 return new class extends Migration
 {
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->string('code');
             $table->text('description')->nullable();
             $table->integer('capacity');
-            $table->string('status');
+            $table->string('status')->default(FacilityStatus::ACTIVE);
             $table->softDeletes();
             $table->timestamps();
         });

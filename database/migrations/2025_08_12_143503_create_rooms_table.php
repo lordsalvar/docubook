@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('code');
             $table->text('description')->nullable();
             $table->integer('capacity');
-            $table->string('status');
+            $table->string('status')->default(RoomStatus::ACTIVE);
             $table->softDeletes();
             $table->timestamps();
         });
