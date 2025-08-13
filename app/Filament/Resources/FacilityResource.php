@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\FacilityResource\Pages;
 use App\Filament\Resources\FacilityResource\RelationManagers;
 use App\Models\Facility;
+use App\Enums\FacilityStatus;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -32,9 +33,9 @@ class FacilityResource extends Resource
                 Forms\Components\TextInput::make('capacity')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('status')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Select::make('status')
+                    ->options(FacilityStatus::class)
+                    ->required(),
             ]);
     }
 

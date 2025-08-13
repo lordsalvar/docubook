@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\FacilityStatus;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasMany; 
 
 class Facility extends Model
 {
@@ -16,6 +17,10 @@ class Facility extends Model
         'description',
         'capacity',
         'status',
+    ];
+
+    protected $casts = [
+        'status' => FacilityStatus::class,
     ];
 
     public function rooms(): HasMany
