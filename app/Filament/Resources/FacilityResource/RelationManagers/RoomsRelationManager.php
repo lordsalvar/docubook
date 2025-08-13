@@ -7,8 +7,6 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RoomsRelationManager extends RelationManager
 {
@@ -24,20 +22,17 @@ class RoomsRelationManager extends RelationManager
                     ->required()
                     ->maxLength(255)
                     ->rules([
-                        'unique:rooms,room_number,NULL,id,facility_id,' . $this->ownerRecord->id
+                        'unique:rooms,room_number,NULL,id,facility_id,'.$this->ownerRecord->id,
                     ])
                     ->validationMessages([
                         'unique' => 'A room with this number already exists for this facility.',
                     ]),
-                Forms\Components\TextInput::make('code')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('description')
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('capacity')
                     ->required()
                     ->numeric(),
+                Forms\Components\Textarea::make('description')
+                    ->maxLength(65535)
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('status')
                     ->required()
                     ->maxLength(255),
@@ -59,10 +54,25 @@ class RoomsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->using(function (array $data) {
+                        $facilityCode = $this->ownerRecord->code ?? '';
+                        $data['code'] = $facilityCode.'-'.$data['room_number'];
+                        $data['facility_id'] = $this->ownerRecord->id;
+
+                        return $this->ownerRecord->rooms()->create($data);
+                    }),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->using(function (array $data, $record) {
+                        $facilityCode = $this->ownerRecord->code ?? '';
+                        $data['code'] = $facilityCode.'-'.$data['room_number'];
+
+                        $record->update($data);
+
+                        return $record;
+                    }),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

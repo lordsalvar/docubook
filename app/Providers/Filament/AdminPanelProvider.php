@@ -26,6 +26,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('app')
             ->path('/')
+            ->spa()
             ->login()
             ->colors([
                 'primary' => Color::Amber,
