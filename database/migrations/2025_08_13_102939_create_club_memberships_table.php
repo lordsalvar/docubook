@@ -5,8 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\User;
 
-
-
 return new class extends Migration
 {
     /**
@@ -14,26 +12,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('organizations', function (Blueprint $table) {
+        Schema::create('club_memberships', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('name');
-            $table->string('acronym');
-            $table->string('club_type');
-            $table->foreignIdFor(User::class,'moderator')->nullable();
-            $table->foreignIdFor(User::class,'dean')->nullable();
+            $table->foreignUlid('club_id')->constrained('organizations');
+            $table->foreignIdFor(User::class, 'user_id');
+            $table->string('designation');
+            $table->string('status');
+            $table->date('joined_date');
             $table->softDeletes();
             $table->timestamps();
-
         });
     }
-
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('organizations');
+        Schema::dropIfExists('club_memberships');
     }
 };
