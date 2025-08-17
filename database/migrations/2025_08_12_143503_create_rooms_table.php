@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('room_number')->unique();
+            $table->string('room_number');
             $table->foreignUlid('facility_id')->constrained('facilities');
             $table->string('code');
             $table->text('description')->nullable();

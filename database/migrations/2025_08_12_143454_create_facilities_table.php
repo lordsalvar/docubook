@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('facilities', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('code');
             $table->text('description')->nullable();
             $table->integer('capacity');
