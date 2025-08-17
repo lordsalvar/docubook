@@ -23,6 +23,10 @@ class Facility extends Model
         'status' => FacilityStatus::class,
     ];
 
+    protected $attributes = [
+        'status' => FacilityStatus::ACTIVE,
+    ];
+
     public function rooms(): HasMany
     {
         return $this->hasMany(Room::class);

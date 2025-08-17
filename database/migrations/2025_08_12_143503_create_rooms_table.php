@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Enums\RoomStatus;
+use App\Models\Facility;
+
 
 return new class extends Migration
 {
@@ -15,7 +17,7 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('room_number')->unique();
-            $table->foreignUlid('facility_id')->nullable()->constrained('facilities');
+            $table->foreignUlid('facility_id')->constrained('facilities');
             $table->string('code');
             $table->text('description')->nullable();
             $table->integer('capacity');

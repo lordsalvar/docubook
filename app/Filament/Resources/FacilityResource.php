@@ -35,6 +35,7 @@ class FacilityResource extends Resource
                     ->numeric(),
                 Forms\Components\Select::make('status')
                     ->options(FacilityStatus::class)
+                    ->default(FacilityStatus::ACTIVE)
                     ->required(),
             ]);
     }
