@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('organizations', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('name');
+            $table->string('logo')->nullable();
             $table->string('acronym');
             $table->string('club_type');
             $table->foreignIdFor(User::class,'moderator')->nullable();
