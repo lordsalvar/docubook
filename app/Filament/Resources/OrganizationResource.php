@@ -12,6 +12,13 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Textarea;
+use App\Filament\Resources\MembershipResource;
 
 class OrganizationResource extends Resource
 {
@@ -23,15 +30,19 @@ class OrganizationResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('acronym')
+                TextInput::make('acronym')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('club_type')
+                TextInput::make('club_type')
                     ->required()
                     ->maxLength(255),
+                FileUpload::make('logo')
+                    ->image(),
+                Toggle::make('status')
+                    ->required(),
             ]);
     }
 
@@ -42,8 +53,6 @@ class OrganizationResource extends Resource
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('acronym'),
                 Tables\Columns\TextColumn::make('club_type'),
-                Tables\Columns\TextColumn::make('moderator'),
-                Tables\Columns\TextColumn::make('dean'),
                 Tables\Columns\TextColumn::make('created_at')
             ])
             ->filters([
@@ -62,7 +71,7 @@ class OrganizationResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            MembershipResource\RelationManagers\UserRelationManager::class,
         ];
     }
 

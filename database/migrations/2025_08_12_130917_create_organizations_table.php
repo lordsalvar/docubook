@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->string('acronym');
             $table->string('club_type');
-            $table->foreignIdFor(User::class,'moderator')->nullable();
-            $table->foreignIdFor(User::class,'dean')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

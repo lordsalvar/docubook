@@ -23,9 +23,19 @@ class Organization extends Model
         'dean',
     ];
 
-    public function members(): HasMany
+    public function memberships(): HasMany
     {
         return $this->hasMany(ClubMembership::class, 'club_id');
+    }
+
+    public function moderator()
+    {
+        return $this->users()->wherePivot('designation', 'moderator');
+    }
+   
+    public function dean()
+    {
+        return $this->users()->wherePivot('designation', 'dean');
     }
 
     public function users(): BelongsToMany
