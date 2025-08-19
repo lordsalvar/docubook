@@ -19,6 +19,7 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Textarea;
 use App\Filament\Resources\MembershipResource;
+use App\Enums\ClubType;
 
 class OrganizationResource extends Resource
 {
@@ -36,9 +37,9 @@ class OrganizationResource extends Resource
                 TextInput::make('acronym')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('club_type')
-                    ->required()
-                    ->maxLength(255),
+                Select::make('club_type')
+                    ->options(ClubType::class)
+                    ->required(),
                 FileUpload::make('logo')
                     ->image(),
                 Toggle::make('status')

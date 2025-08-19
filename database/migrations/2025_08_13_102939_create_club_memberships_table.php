@@ -13,12 +13,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('club_memberships', function (Blueprint $table) {
-            $table->id()->primary();
+            $table->ulid('id')->primary();
             $table->foreignUlid('club_id')->constrained('organizations');
             $table->foreignIdFor(User::class, 'user_id');
             $table->string('designation');
-            $table->string('status');
-            $table->date('joined_date');
+            $table->string('status')->default('active');
+            $table->date('joined_date')->default(now());
             $table->softDeletes();
             $table->timestamps();
         });

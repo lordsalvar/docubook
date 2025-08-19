@@ -10,6 +10,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Models\User;
+use App\Enums\Designation;
 
 class UserRelationManager extends RelationManager
 {
@@ -26,9 +27,12 @@ class UserRelationManager extends RelationManager
                     ->searchable()
                     ->preload()
                     ->required(),
-                Forms\Components\TextInput::make('designation')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Select::make('designation')
+                    ->options(Designation::class)
+                    ->required(),
+                Forms\Components\DatePicker::make('joined_date')
+                    ->default(now())
+                    ->required(),
             ]);
     }
 

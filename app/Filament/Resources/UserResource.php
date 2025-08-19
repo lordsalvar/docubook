@@ -22,11 +22,18 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name'),
+                TextInput::make('name')
+                    ->required(),
                 FileUpload::make('avatar'),
-                TextInput::make('email'),
-                TextInput::make('password'),
-                TextInput::make('password_confirmation'),
+                TextInput::make('email')
+                    ->unique(ignoreRecord: true)
+                    ->required(),
+                TextInput::make('password')
+                    ->required(fn (string $context): bool => $context === 'create')
+                    ->password(),
+                TextInput::make('password_confirmation')
+                    ->required(fn (string $context): bool => $context === 'create')
+                    ->password(),
                
             ]);
     }
