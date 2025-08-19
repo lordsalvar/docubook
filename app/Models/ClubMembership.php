@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
+use App\Enums\Designation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 
 class ClubMembership extends Model
 {
     protected $table = 'club_memberships';
 
+    use HasUlids;
+
     protected $fillable = [
-        'club_id',
         'user_id',
         'designation',
         'status',
@@ -18,6 +21,7 @@ class ClubMembership extends Model
     
     protected $casts = [
         'joined_date' => 'date',
+        'designation' => Designation::class,
     ];
 
 

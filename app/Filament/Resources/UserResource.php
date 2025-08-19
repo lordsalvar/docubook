@@ -8,6 +8,9 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\FileUpload;
 
 class UserResource extends Resource
 {
@@ -19,7 +22,19 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name')
+                    ->required(),
+                FileUpload::make('avatar'),
+                TextInput::make('email')
+                    ->unique(ignoreRecord: true)
+                    ->required(),
+                TextInput::make('password')
+                    ->required(fn (string $context): bool => $context === 'create')
+                    ->password(),
+                TextInput::make('password_confirmation')
+                    ->required(fn (string $context): bool => $context === 'create')
+                    ->password(),
+               
             ]);
     }
 

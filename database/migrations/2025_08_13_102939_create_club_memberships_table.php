@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignUlid('club_id')->constrained('organizations');
             $table->foreignIdFor(User::class, 'user_id');
             $table->string('designation');
-            $table->string('status');
-            $table->date('joined_date');
+            $table->string('status')->default('active');
+            $table->date('joined_date')->default(now());
             $table->softDeletes();
             $table->timestamps();
         });
