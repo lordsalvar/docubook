@@ -12,6 +12,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\FileUpload;
 
+
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
@@ -22,9 +23,20 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                FileUpload::make('avatar')
+                ->avatar()
+                ->imageEditor()
+                ->columnSpanFull()
+                ->extraAttributes([
+                    'class' => 'mx-auto',
+                ])
+                ->imageEditorAspectRatios([
+                    '16:9',
+                    '4:3',
+                    '1:1',
+                ]),
                 TextInput::make('name')
                     ->required(),
-                FileUpload::make('avatar'),
                 TextInput::make('email')
                     ->unique(ignoreRecord: true)
                     ->required(),
