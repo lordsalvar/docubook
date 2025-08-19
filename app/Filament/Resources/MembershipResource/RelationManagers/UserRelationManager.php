@@ -9,6 +9,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Models\User;
 
 class UserRelationManager extends RelationManager
 {
@@ -19,6 +20,12 @@ class UserRelationManager extends RelationManager
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('user_id')
+                    ->label('User')
+                    ->options(User::all()->pluck('name', 'id'))
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 Forms\Components\TextInput::make('designation')
                     ->required()
                     ->maxLength(255),

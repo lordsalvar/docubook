@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('club_memberships', function (Blueprint $table) {
-            $table->ulid('id')->primary();
+            $table->id()->primary();
             $table->foreignUlid('club_id')->constrained('organizations');
             $table->foreignIdFor(User::class, 'user_id');
             $table->string('designation');
