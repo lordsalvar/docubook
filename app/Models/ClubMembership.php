@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Enums\Designation;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
 
 class ClubMembership extends Model
 {
@@ -18,12 +18,11 @@ class ClubMembership extends Model
         'designation',
         'status',
     ];
-    
+
     protected $casts = [
         'joined_date' => 'date',
         'designation' => Designation::class,
     ];
-
 
     public function organization(): BelongsTo
     {

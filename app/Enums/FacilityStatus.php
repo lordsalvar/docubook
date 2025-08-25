@@ -10,7 +10,7 @@ enum FacilityStatus: string
 
     public function label(): string
     {
-        return match ($this){
+        return match ($this) {
             self::ACTIVE => 'Active',
             self::INACTIVE => 'Inactive',
             self::UNDER_MAINTENANCE => 'Under Maintenance',

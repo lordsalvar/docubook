@@ -4,14 +4,12 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\FileUpload;
-
 
 class UserResource extends Resource
 {
@@ -24,17 +22,17 @@ class UserResource extends Resource
         return $form
             ->schema([
                 FileUpload::make('avatar')
-                ->avatar()
-                ->imageEditor()
-                ->columnSpanFull()
-                ->extraAttributes([
-                    'class' => 'mx-auto',
-                ])
-                ->imageEditorAspectRatios([
-                    '16:9',
-                    '4:3',
-                    '1:1',
-                ]),
+                    ->avatar()
+                    ->imageEditor()
+                    ->columnSpanFull()
+                    ->extraAttributes([
+                        'class' => 'mx-auto',
+                    ])
+                    ->imageEditorAspectRatios([
+                        '16:9',
+                        '4:3',
+                        '1:1',
+                    ]),
                 TextInput::make('name')
                     ->required(),
                 TextInput::make('email')
@@ -46,7 +44,7 @@ class UserResource extends Resource
                 TextInput::make('password_confirmation')
                     ->required(fn (string $context): bool => $context === 'create')
                     ->password(),
-               
+
             ]);
     }
 

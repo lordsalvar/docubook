@@ -2,33 +2,36 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Enums\RoomStatus;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 class FacilitySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-       DB::table('facilities')->insert([
-        [
-            'name' => 'Facility 1',
-            'description' => 'Facility 1 description',
-            'address' => 'Facility 1 address',
-            'phone' => 'Facility 1 phone',
-            'email' => 'Facility 1 email',
-            'website' => 'Facility 1 website',
-        ]
-       ]);
+        $facilityId = (string) Str::ulid();
 
-       DB::table('rooms')->insert([
-        [
-            'name' => 'Room 1',
-            'description' => 'Room 1 description',
-            'facility_id' => 1,
-        ]
-       ]);
+        DB::table('facilities')->insert([
+            'id' => $facilityId,
+            'name' => 'Main Facility',
+            'code' => 'FAC-001',
+            'description' => 'Primary facility seeded for development.',
+            'capacity' => 100,
+            'status' => RoomStatus::ACTIVE,
+        ]);
+
+        DB::table('rooms')->insert([
+            [
+                'id' => (string) Str::ulid(),
+                'room_number' => 'R-101',
+                'facility_id' => $facilityId,
+                'code' => 'RM-101',
+                'description' => 'First room in the main facility',
+                'capacity' => 10,
+                'status' => RoomStatus::ACTIVE,
+            ],
+        ]);
     }
 }

@@ -2,7 +2,4 @@
 
 namespace App\Enums;
 
-class StatusEnum
-{
-    
-}
+class StatusEnum {}
