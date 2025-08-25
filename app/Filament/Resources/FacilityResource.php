@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\FacilityStatus;
 use App\Filament\Resources\FacilityResource\Pages;
 use App\Filament\Resources\FacilityResource\RelationManagers;
 use App\Models\Facility;
-use App\Enums\FacilityStatus;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;

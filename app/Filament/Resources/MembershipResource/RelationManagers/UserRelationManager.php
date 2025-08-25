@@ -2,20 +2,17 @@
 
 namespace App\Filament\Resources\MembershipResource\RelationManagers;
 
+use App\Enums\Designation;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Models\User;
-use App\Enums\Designation;
 
 class UserRelationManager extends RelationManager
 {
     protected static string $relationship = 'memberships';
-
 
     public function form(Form $form): Form
     {
@@ -48,7 +45,7 @@ class UserRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                ->label('Add Member'),
+                    ->label('Add Member'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

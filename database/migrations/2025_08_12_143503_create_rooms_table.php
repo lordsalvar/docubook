@@ -1,11 +1,9 @@
 <?php
 
+use App\Enums\RoomStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\RoomStatus;
-use App\Models\Facility;
-
 
 return new class extends Migration
 {

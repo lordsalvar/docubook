@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -19,7 +18,7 @@ class OrganizationSeeder extends Seeder
             'name' => 'Club of the Year',
             'logo' => 'https://via.placeholder.com/150',
             'club_type' => 'club',
-            'acronym' => 'COTY'
+            'acronym' => 'COTY',
         ]);
     }
 }
