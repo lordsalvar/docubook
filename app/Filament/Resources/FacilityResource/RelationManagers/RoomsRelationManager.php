@@ -52,7 +52,7 @@ class RoomsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('status'),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
@@ -74,7 +74,9 @@ class RoomsRelationManager extends RelationManager
 
                         return $record;
                     }),
+                Tables\Actions\RestoreAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
