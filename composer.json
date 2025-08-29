@@ -10,7 +10,9 @@
         "filament/filament": "^3.3",
         "guava/calendar": "^1.14",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/tinker": "^2.10.1",
+        "ext-intl": "*",
+        "ext-zip": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
