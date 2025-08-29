@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\ClubType;
+use App\Enums\OrgType;
 use App\Filament\Resources\OrganizationResource\Pages;
 use App\Models\Organization;
 use Filament\Forms\Components\FileUpload;
@@ -24,6 +24,16 @@ class OrganizationResource extends Resource
     {
         return $form
             ->schema([
+                FileUpload::make('logo')
+                ->label('Logo')
+                ->columnSpanFull()
+                ->image()
+                ->imageEditor()
+                ->imageEditorAspectRatios([
+                    '16:9',
+                    '4:3',
+                    '1:1',
+                ]),
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -31,12 +41,10 @@ class OrganizationResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Select::make('club_type')
-                    ->options(ClubType::class)
+                    ->options(OrgType::class)
                     ->required(),
-                FileUpload::make('logo')
-                    ->image(),
                 Toggle::make('status')
-                    ->required(),
+                ->required(),
             ]);
     }
 
