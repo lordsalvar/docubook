@@ -22,7 +22,7 @@ class Organization extends Model
 
     public function memberships(): HasMany
     {
-        return $this->hasMany(ClubMembership::class, 'club_id');
+        return $this->hasMany(ClubMembership::class, 'organization_id');
     }
 
     public function moderator()
@@ -37,7 +37,7 @@ class Organization extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'club_memberships', 'club_id', 'user_id')
+        return $this->belongsToMany(User::class, 'club_memberships', 'organization_id', 'user_id')
             ->withPivot('designation', 'status', 'joined_date')
             ->withTimestamps();
     }

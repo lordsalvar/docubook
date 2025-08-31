@@ -56,7 +56,7 @@ class User extends Authenticatable
 
     public function organizations(): BelongsToMany
     {
-        return $this->belongsToMany(Organization::class, 'club_memberships', 'user_id', 'club_id')
+        return $this->belongsToMany(Organization::class, 'club_memberships', 'user_id', 'organization_id')
             ->withPivot('designation', 'status', 'joined_date')
             ->withTimestamps();
     }
