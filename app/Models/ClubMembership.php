@@ -15,8 +15,10 @@ class ClubMembership extends Model
 
     protected $fillable = [
         'user_id',
+        'organization_id',
         'designation',
         'status',
+        'joined_date',
     ];
 
     protected $casts = [
@@ -26,7 +28,7 @@ class ClubMembership extends Model
 
     public function organization(): BelongsTo
     {
-        return $this->belongsTo(Organization::class, 'club_id');
+        return $this->belongsTo(Organization::class, 'organization_id');
     }
 
     public function user(): BelongsTo

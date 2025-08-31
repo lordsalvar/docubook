@@ -10,6 +10,10 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Models\Organization;
+use App\Enums\Designation;
+use App\Enums\StatusEnum;
+use Filament\Forms\Components\Select;
 
 class UserResource extends Resource
 {
@@ -52,13 +56,47 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('role'),
+                Tables\Columns\TextColumn::make('contact'),   
+                Tables\Columns\TextColumn::make('organizations.name'),
+                Tables\Columns\TextColumn::make('memberships.organization.name'),
+                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('created_at'),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('addMembership')
+                ->label('Add Membership')
+                ->icon('heroicon-o-plus')
+                ->form([
+                    Select::make('organization_id')
+                    ->label('Organization')
+                    ->options(fn () => Organization::pluck('name', 'id')->toArray())
+                    ->searchable()
+                    ->preload()
+                    ->required(),
+                    Select::make('designation')
+                    ->label('Role')
+                    ->options(Designation::class)
+                    ->required(),
+                    Select::make('status')
+                    ->label('Status')
+                    ->options(['active' => 'Active', 'inactive' => 'Inactive'])
+                    ->default('active')
+                    ->required(),
+                ])
+                ->action(function (array $data, User $record) {
+                    $record->memberships()->create([
+                        'organization_id' => $data['organization_id'],
+                        'designation' => $data['designation'],
+                        'status' => $data['status'],
+                        'joined_date' => now(),
+                    ]);
+                }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

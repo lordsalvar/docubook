@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('club_memberships', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->foreignUlid('club_id')->constrained('organizations');
+            $table->foreignUlid('organization_id')->constrained('organizations');
             $table->foreignIdFor(User::class, 'user_id');
             $table->string('designation');
             $table->string('status')->default('active');
